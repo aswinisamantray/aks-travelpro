@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import './App.css'
-import Navbar from './components/navbar'
 import Home from './components/Home'
-import About from './components/About';
 
 function App() {
   return (
@@ -11,7 +9,6 @@ function App() {
     <Router >
     <Routes>
          <Route exact path='/' element={<Home/>}/>
-         <Route exact path='/about' element={<About/>}/>
        </Routes>
     </Router>
     </>
