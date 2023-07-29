@@ -1,31 +1,20 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
-const User = require('./models/User');
+import connectToMongo from './db'
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import bcrypt from 'bcrypt';
+import User from './User'
 
+connectToMongo();
 const app = express();
 const PORT = 5000;
-
 app.use(bodyParser.json());
 app.use(cors());
-
-mongoose.connect('mongodb+srv://ecoboy:ilumm98686@travel-planner-pro.wlffuj6.mongodb.net/?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
 
 // User sign-up
 app.post('/signup', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, email } = req.body;
 
     // Check if the user already exists
     const existingUser = await User.findOne({ username });
@@ -33,11 +22,14 @@ app.post('/signup', async (req, res) => {
       return res.status(409).json({ message: 'Username already exists' });
     }
 
-    // Hash the password before saving it to the database
+    const exisitingMail=await User.findOne({email});
+    if(exisitingMail){
+      return res.status(409).json({ message: 'Email already exists' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Save the new user to the database
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ username, password: hashedPassword, email});
     await newUser.save();
 
     res.status(201).json({ message: 'User created successfully' });
@@ -50,7 +42,7 @@ app.post('/signup', async (req, res) => {
 // User log-in
 app.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const {username, password} = req.body;
 
     // Find the user in the database
     const user = await User.findOne({ username });
