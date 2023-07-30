@@ -1,9 +1,9 @@
 import React ,{useState}from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
-
+    const history=useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,10 +16,15 @@ const Register = () => {
             setErrorMessage('Please check the checkbox before submitting.');
             return; 
           }
-        const formData = { name, password, email };
+        const formData = {password, email };
 
         try {
-          await axios.post('http://localhost:5000/signup', formData);
+          await axios.post('http://localhost:5000/signup', formData)
+          .then(res=>{
+            if(res.data!=='Email already exists'){
+              history('/');
+            }
+          })
         } catch (error) {
           console.error(error);
         }
@@ -57,10 +62,10 @@ const Register = () => {
 
                 <p className="text-center">or:</p>
 
-                <div className="form-outline mb-4">
+                {/* <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerName">Name</label>
                     <input type="text" id="registerName"  value={name} placeholder='Enter your name' className="form-control" onChange={(e) => setName(e.target.value)}/>
-                </div>
+                </div> */}
 
                 <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerEmail">Email</label>
@@ -81,7 +86,7 @@ const Register = () => {
                     <input className="form-check-input me-2" type="checkbox" value="" id="registerCheck"
                     aria-describedby="registerCheckHelpText" checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)}/>
                     <label className="form-check-label" htmlFor="registerCheck">
-                    I have read and agree to the terms
+                    I have provided all the correct details
                     </label>
                 </div>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
