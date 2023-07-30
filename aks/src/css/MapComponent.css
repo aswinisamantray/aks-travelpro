@@ -1,5 +1,6 @@
 .mapContainer{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 50vh;
@@ -9,4 +10,9 @@
 .map{
     width: 100%;
    height: 100%;
+}
+
+.mapSearch{
+    border: 3px solid black;
+    border-radius: 25px;
 }

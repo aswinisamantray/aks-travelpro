@@ -3,8 +3,7 @@ import Navbar from './navbar'
 import Footer from './Footer'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// `https://nominatim.openstreetmap.org/search?q=${place}&format=json&limit=1`
-        // `https://places-dsn.algolia.net/1/places/query?query=${place}`
+
 const Home = ({ onLocationSelect }) => {
   const [place, setPlace] = useState('');
   const handleSubmit=async ()=>{

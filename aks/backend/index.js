@@ -1,9 +1,16 @@
-import connectToMongo from './db'
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import bcrypt from 'bcrypt';
-import User from './User'
+// import connectToMongo from './db'
+// import express from 'express';
+// import cors from 'cors';
+// import bodyParser from 'body-parser';
+// import bcrypt from 'bcrypt';
+// import User from './User'
+
+const express=require('express');
+const connectToMongo=require('./db');
+const cors=require('cors');
+const bodyParser=require('body-parser');
+const bcrypt=require('bcrypt');
+const User=require('./User')
 
 connectToMongo();
 const app = express();

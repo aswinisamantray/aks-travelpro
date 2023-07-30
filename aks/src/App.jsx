@@ -13,10 +13,14 @@ function App() {
   const [latitude,setLatitude]=useState(null);
   const [longitude,setLongitude]=useState(null);
   const [place,setPlace]=useState('');
+  // var latitude=null;
+  // var longitude=null;
 
-  const handleLocationSelect = (coordinates) => {
+  const handleLocationSelect =(coordinates) => {
     setLatitude(coordinates.latitude);
     setLongitude(coordinates.longitude);
+    // latitude=coordinates.latitude;
+    // longitude=coordinates.latitude;
     setPlace(coordinates.place);
   };
   return (

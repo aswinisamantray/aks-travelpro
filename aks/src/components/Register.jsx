@@ -10,23 +10,19 @@ const Register = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = async(e) => {
+        e.preventDefault();
          if (!isChecked) {
             setErrorMessage('Please check the checkbox before submitting.');
             return; 
           }
-        const formData = { name, email, message };
-    
-        axios.post('http://localhost:5000/signup', formData)
-          .then((response) => {
-            console.log(response.data);
-            console.log("Registration successful!!")
-          })
-          .catch((error) => {
-            console.error(error.response.data);
-          });
+        const formData = { name, password, email };
 
-
+        try {
+          await axios.post('http://localhost:5000/signup', formData);
+        } catch (error) {
+          console.error(error);
+        }
       };
   return (
     <div className='mt-5'>
