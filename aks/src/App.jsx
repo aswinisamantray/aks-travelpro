@@ -7,6 +7,7 @@ import Package from './components/Package';
 import Login from './components/LoginForm';
 import Register from './components/Register';
 import MapComponent from './components/MapComponent';
+import FAQ from './components/FAQ';
 
 function App() {
   // const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -32,6 +33,7 @@ function App() {
          <Route exact path='/packages' element={<Package/>}/>
          <Route exact path='/login' element={<Login/>}/>
          <Route exact path='/register' element={<Register/>}/>
+         <Route exact path='/faq' element={<FAQ/>}/>
          {latitude && longitude && (
             <Route exact path='/map' element={<MapComponent lat={latitude} lon={longitude} place={place}/>} />
           )}

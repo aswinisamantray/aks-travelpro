@@ -1,0 +1,10 @@
+.faqContainer{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-container{
+    margin:8vw 0;
+}
