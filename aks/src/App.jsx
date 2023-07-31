@@ -28,8 +28,8 @@ function App() {
     <>
     <Router>
       <Routes>
-         <Route exact path='/home' element={<Home onLocationSelect={handleLocationSelect}/>}/>
-         <Route exact path='/' element={<Login/>}/>
+         <Route exact path='/' element={<Home onLocationSelect={handleLocationSelect}/>}/>
+         <Route exact path='/login' element={<Login/>}/>
          <Route exact path='/register' element={<Register/>}/>
          <Route exact path='/faq' element={<FAQ/>}/>
          <Route exact path='/contact' element={<Contact/>}/>

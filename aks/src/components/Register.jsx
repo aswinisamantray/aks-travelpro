@@ -22,7 +22,7 @@ const Register = () => {
           await axios.post('http://localhost:5000/signup', formData)
           .then(res=>{
             if(res.data!=='Email already exists'){
-              history('/home');
+              history('/');
             }
           })
         } catch (error) {
@@ -72,7 +72,7 @@ const Register = () => {
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                   <button type="submit" className="btn btn-primary btn-block mb-3" onClick={handleSubmit}>Register</button>
                   <div className="text-center">
-                     <p>Already a member? <Link to="/">Sign in</Link></p>
+                     <p>Already a member? <Link to="/login">Sign in</Link></p>
                   </div>
                 </form>
             </div>

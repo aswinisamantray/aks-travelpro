@@ -37,7 +37,7 @@ const Footer = () => {
                 <div className="row">
                     <div className="col-md-6 text-center text-md-end">
                         <div className="footer-menu">
-                            <Link to="/home">Home</Link>
+                            <Link to="/">Home</Link>
                             <Link to="/faq">FAQs</Link>
                         </div>
                     </div>
