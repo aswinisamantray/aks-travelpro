@@ -10,18 +10,13 @@ import MapComponent from './components/MapComponent';
 import FAQ from './components/FAQ';
 
 function App() {
-  // const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [latitude,setLatitude]=useState(null);
   const [longitude,setLongitude]=useState(null);
   const [place,setPlace]=useState('');
-  // var latitude=null;
-  // var longitude=null;
-
+  
   const handleLocationSelect =(coordinates) => {
     setLatitude(coordinates.latitude);
     setLongitude(coordinates.longitude);
-    // latitude=coordinates.latitude;
-    // longitude=coordinates.latitude;
     setPlace(coordinates.place);
   };
   return (

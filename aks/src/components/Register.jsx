@@ -16,7 +16,7 @@ const Register = () => {
             setErrorMessage('Please check the checkbox before submitting.');
             return; 
           }
-        const formData = {password, email };
+        const formData = {name,password, email };
 
         try {
           await axios.post('http://localhost:5000/signup', formData)
@@ -62,10 +62,10 @@ const Register = () => {
 
                 <p className="text-center">or:</p>
 
-                {/* <div className="form-outline mb-4">
+                <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerName">Name</label>
                     <input type="text" id="registerName"  value={name} placeholder='Enter your name' className="form-control" onChange={(e) => setName(e.target.value)}/>
-                </div> */}
+                </div>
 
                 <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerEmail">Email</label>

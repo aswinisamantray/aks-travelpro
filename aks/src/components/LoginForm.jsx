@@ -1,9 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React,{useState} from 'react'
+import {useNavigate, Link } from 'react-router-dom'
+import axios from 'axios';
 
 const LoginForm = () => {
+    const history=useNavigate();
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
 
-    
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        const formData = {name,password};
+        try {
+          await axios.post('http://localhost:5000/login', formData)
+          .then(res=>{
+            if(res.data!=='Inavlid name' && res.data!=='Inavlid password'){
+              history('/');
+            }
+          })
+        } catch (error) {
+          console.error(error);
+        }
+      };
   return (
     <div className='mt-5'>
         <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -38,12 +55,12 @@ const LoginForm = () => {
             <p className="text-center">or:</p>
 
             <div className="form-outline mb-4">
-                <input type="email" id="loginName" className="form-control" />
-                <label className="form-label" htmlFor="loginName">Email or username</label>
+                <input type="email" id="loginName" value={name} className="form-control" onChange={(e) => setName(e.target.value)}/>
+                <label className="form-label" htmlFor="loginName">Name</label>
             </div>
 
             <div className="form-outline mb-4">
-                <input type="password" id="loginPassword" className="form-control" />
+                <input type="password" id="loginPassword" value={password} className="form-control" onChange={(e) => setPassword(e.target.value)}/>
                 <label className="form-label" htmlFor="loginPassword">Password</label>
             </div>
 
@@ -60,7 +77,7 @@ const LoginForm = () => {
                 </div>
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block mb-4">Sign in</button>
+            <button type="submit" className="btn btn-primary btn-block mb-4" onClick={handleSubmit}>Sign in</button>
 
             <div className="text-center">
                 <p>Not a member? <Link to="/register">Register</Link></p>
