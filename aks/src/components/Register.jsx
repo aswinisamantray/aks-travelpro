@@ -22,7 +22,7 @@ const Register = () => {
           await axios.post('http://localhost:5000/signup', formData)
           .then(res=>{
             if(res.data!=='Email already exists'){
-              history('/');
+              history('/home');
             }
           })
         } catch (error) {
@@ -40,28 +40,7 @@ const Register = () => {
 
         <div className="tab-content">
             <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                <form>
-                <div className="text-center mb-3">
-                    <p>Sign up with:</p>
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                    <i className="fab fa-facebook-f"></i>
-                    </button>
-
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                    <i className="fab fa-google"></i>
-                    </button>
-
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                    <i className="fab fa-twitter"></i>
-                    </button>
-
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                    <i className="fab fa-github"></i>
-                    </button>
-                </div>
-
-                <p className="text-center">or:</p>
-
+              <form>
                 <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerName">Name</label>
                     <input type="text" id="registerName"  value={name} placeholder='Enter your name' className="form-control" onChange={(e) => setName(e.target.value)}/>
@@ -89,8 +68,12 @@ const Register = () => {
                     I have provided all the correct details
                     </label>
                 </div>
+
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                   <button type="submit" className="btn btn-primary btn-block mb-3" onClick={handleSubmit}>Register</button>
+                  <div className="text-center">
+                     <p>Already a member? <Link to="/">Sign in</Link></p>
+                  </div>
                 </form>
             </div>
         </div>

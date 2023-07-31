@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="container py-5">
             <div className="row g-5">
                 <div className="col-lg-3 col-md-6">
-                    <Link className="btn btn-link" to="">Contact Us</Link>
+                    <Link className="btn btn-link" to="/contact">Contact Us</Link>
                     <Link className="btn btn-link" to="/faq">FAQs</Link>
                 </div>
                 <div className="col-lg-3 col-md-6">

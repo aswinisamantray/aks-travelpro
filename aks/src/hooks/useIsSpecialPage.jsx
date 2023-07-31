@@ -6,7 +6,7 @@ const useIsSpecialPage = () => {
     const [isSpecialPage, setIsSpecialPage] = useState(false);
   
     useEffect(() => {
-      setIsSpecialPage(location.pathname !== '/');
+      setIsSpecialPage(location.pathname !== '/home');
     }, [location]);
   
     return isSpecialPage;

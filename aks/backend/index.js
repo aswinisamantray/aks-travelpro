@@ -3,12 +3,16 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import bcrypt from 'bcrypt';
 import mongoose from "mongoose";
+import jwt from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
 import dotenv from 'dotenv';
 dotenv.config({path:'../.env'});
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+const secretKey = uuidv4();
 
 const mongoURI=process.env.DB_URL;
 
@@ -66,21 +70,40 @@ app.post('/login', async (req, res) => {
   try {
     const {name, password} = req.body;
     const user = await User.findOne({ name });
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid name' });
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!user || !isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    console.log(isPasswordValid+","+user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid password' });
-    }
-     res.status(200).json({ message: 'Login successful' });
+    const token = jwt.sign({ userId: user._id }, secretKey);
+
+     res.status(200).json({ message: 'Login successful' ,token});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+app.get('/protected', verifyToken, (req, res) => {
+  res.json({ message: 'You have access to this protected route!', userId: req.userId });
+});
+
+function verifyToken(req, res, next) {
+  const token = req.header('Authorization');
+
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  // Verify the token
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+    req.userId = decoded.userId;
+    next();
+  });
+}
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server listening on port ${process.env.PORT || 5000}`);
