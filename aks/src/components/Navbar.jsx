@@ -12,9 +12,8 @@ export default function Navbar(){
         setIsMenuOpen(!isMenuOpen);
       };
 
-    const isSpecialPage=useIsSpecialPage();
+        const isSpecialPage=useIsSpecialPage();
       const navBG=isSpecialPage ? 'yellowgreen' : 'transparent';
-      const logoColor=isSpecialPage?'white':'yellowgreen';
     return(
       <nav className="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0" style={{backgroundColor:navBG}}>
             <Link to='/' className="navbar-brand p-0">

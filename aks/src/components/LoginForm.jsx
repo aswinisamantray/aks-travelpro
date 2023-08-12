@@ -14,7 +14,7 @@ const LoginForm = ({Token}) => {
           await axios.post('http://localhost:5000/login', formData)
           .then(res=>{
             if(res.data!=='Invalid credentials'){
-              history('/home');
+              history('/');
             }
             Token(res.data.token);
           })

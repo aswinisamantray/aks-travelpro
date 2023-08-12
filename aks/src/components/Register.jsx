@@ -9,12 +9,17 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [userMessage,setUserMessage]=useState('');
+    const [emailMessage,setEmailMessage]=useState('');
 
     const handleSubmit = async(e) => {
         e.preventDefault();
          if (!isChecked) {
             setErrorMessage('Please check the checkbox before submitting.');
             return; 
+          }
+          else{
+            setErrorMessage('');
           }
         const formData = {name,password, email };
 
@@ -23,6 +28,10 @@ const Register = () => {
           .then(res=>{
             if(res.data!=='Email already exists'){
               history('/');
+            }
+            else{
+              setEmailMessage('Credentials already exist');
+              return;
             }
           })
         } catch (error) {
@@ -41,6 +50,7 @@ const Register = () => {
         <div className="tab-content">
             <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
               <form>
+              {emailMessage && <p style={{ color: 'red' }}>{emailMessage}</p>}
                 <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerName">Name</label>
                     <input type="text" id="registerName"  value={name} placeholder='Enter your name' className="form-control" onChange={(e) => setName(e.target.value)}/>
