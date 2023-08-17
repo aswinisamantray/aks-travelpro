@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../css/MapComponent.css'
-import Navbar from './Navbar'
+import Navbar from './Navbar';
 import Footer from './Footer';
 import Destination from './Destination';
 import axios from 'axios';

@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {useNavigate, Link } from 'react-router-dom'
 import axios from 'axios';
 
-const LoginForm = ({Token}) => {
+const LoginForm = () => {
     const history=useNavigate();
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -13,10 +13,10 @@ const LoginForm = ({Token}) => {
         try {
           await axios.post('http://localhost:5000/login', formData)
           .then(res=>{
-            if(res.data!=='Invalid credentials'){
+            const token = res.data.token;
+            if(token){
               history('/');
             }
-            Token(res.data.token);
           })
         } catch (error) {
           console.error(error);

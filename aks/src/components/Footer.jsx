@@ -1,7 +1,33 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 const Footer = () => {
+    const [email, setEmail] = useState('');
+    const [message,setMessage]=useState('');
+    const subscribed=async()=>{
+        setMessage('');
+        if(email===''){
+            setMessage('Please enter a valid email');
+            setTimeout(()=>{setMessage('')},5000);
+            return;
+        }
+        const data={email};
+
+        try {
+            const response = await axios.post('http://localhost:5000/subscribe', data);
+            if (response.data !== 'Already subscribed') {
+                setMessage('Thank you for subscribing!');
+                setEmail('');
+                setTimeout(()=>{setMessage('')},5000);
+            } else {
+                setMessage(response.data);
+                console.log(response.data);
+            }
+          } catch (error) {
+            console.error(error);
+          }
+    };
   return (
         <div className="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div className="container py-5">
@@ -26,9 +52,10 @@ const Footer = () => {
                     <h4 className="text-white mb-3">Newsletter</h4>
                     <p>Subscribe to our newsletter for latest updates</p>
                     <div className="position-relative mx-auto" style={{maxWidth:'400px'}}>
-                        <input className="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email"/>
-                        <button type="button" className="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <input className="form-control border-primary w-100 py-3 ps-4 pe-5" value={email} type="email" placeholder="Your email" onChange={(e) => setEmail(e.target.value)}/>
+                        <button type="button" className="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2" onClick={subscribed}>Subscribe</button>
                     </div>
+                    {message && <p style={{ color: 'white' }}>{message}</p>}
                 </div>
             </div>
         </div>

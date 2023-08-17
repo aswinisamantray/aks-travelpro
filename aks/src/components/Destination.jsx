@@ -2,8 +2,7 @@ import React,{useEffect,useState} from 'react'
 import '../css/bootstrap.min.css'
 import '../css/style.css'
 import axios from 'axios'
-import dotenv from 'dotenv';
-dotenv.config({path:'../.env'});
+
 
 // const apiKey = '5ae2e3f221c38a28845f05b613c7a21b5550c836fa73f383cb3a5762';
 
@@ -11,7 +10,7 @@ const Destination = ({place}) => {
     const [places,setPlaces]=useState([]);
     const showTourism=async()=>{
         try {
-            const apikey=process.env.REACT_APP_API_KEY;
+            const apikey='a152c4776795481c8e25a23732aff914';
             const response = await axios.get(
                 `https://api.geoapify.com/v1/geocode/autocomplete?text=${place}&format=json&apiKey=${apikey}`    
             );

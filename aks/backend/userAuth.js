@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt';
 import mongoose from "mongoose";
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
+import User from './models/User.js';
+import Subscriber from './models/Subscriber.js';
 import dotenv from 'dotenv';
 dotenv.config({path:'../.env'});
 
@@ -14,9 +16,7 @@ app.use(cors());
 
 const secretKey = uuidv4();
 
-const mongoURI=process.env.DB_URL;
-
-
+const mongoURI='mongodb+srv://ecoboy:ilumm98686@travel-planner-pro.wlffuj6.mongodb.net/travel-planner?retryWrites=true&w=majority';
 
     mongoose
     .connect(mongoURI,{
@@ -28,15 +28,6 @@ const mongoURI=process.env.DB_URL;
     db.once('open', () => {
       console.log('Connected to MongoDB');
     });
-
-const userSchema = new mongoose.Schema({
-  name:{type: String, required: true, unique: true},
-  password: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-});
-
-const User = mongoose.model('User', userSchema);
-
 
 // User sign-up
 app.post('/signup', async (req, res) => {
@@ -104,6 +95,25 @@ function verifyToken(req, res, next) {
     next();
   });
 }
+
+//subscribe-newsletter
+app.post('/subscribe', async (req, res) => {
+  try {
+    const {email } = req.body;
+    const exisitingMail=await Subscriber.findOne({email});
+    if (exisitingMail) {
+        return res.status(409).json({ message: 'Already subscribed' });
+      }
+
+    const newsub=new Subscriber({email:email});
+    await newsub.save();
+
+    res.status(201).json({ message: 'Thank You for subscribing!' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server listening on port ${process.env.PORT || 5000}`);
