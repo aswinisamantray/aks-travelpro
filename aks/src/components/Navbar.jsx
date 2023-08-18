@@ -2,15 +2,16 @@ import React ,{useState,useEffect}from "react";
 import { Link } from "react-router-dom"
 import '../css/bootstrap.min.css'
 import '../css/style.css'
+import { useUserContext } from "../useContext/Context";
 import useIsSpecialPage from "../hooks/useIsSpecialPage";
 export default function Navbar(){
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolling,setIsScrolling]=useState(false);
+    const { userName } = useUserContext();
 
       const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-      };
+      };     
 
         const isSpecialPage=useIsSpecialPage();
       const navBG=isSpecialPage ? 'yellowgreen' : 'transparent';
@@ -33,7 +34,7 @@ export default function Navbar(){
                     </div>
                     <Link to='/contact' className='nav-item nav-link' onClick={toggleMenu}>Contact</Link>
                 </div>
-                <Link to='/register' className="btn btn-primary rounded-pill py-2 px-4">Register</Link>
+                <Link to='/register' className="btn btn-primary rounded-pill py-2 px-4">{userName.length>0?userName.substring(0,5)+(userName.length>5?'...':''):'Register'}</Link>
             </div>
         </nav>
     )

@@ -8,6 +8,7 @@ import MapComponent from './components/MapComponent';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Error from './components/Error';
+import Executive from './components/Executive';
 
 function App() {
   const [latitude,setLatitude]=useState(null);
@@ -33,6 +34,7 @@ function App() {
          <Route exact path='/register' element={<Register/>}/>
          <Route exact path='/faq' element={<FAQ/>}/>
          <Route exact path='/contact' element={<Contact/>}/>
+         <Route exact path='/executive' element={<Executive/>}/>
           <Route exact path='/map' element={<MapComponent lat={latitude} lon={longitude} place={place}/>} />
           <Route exact path='/404' element={<Error/>}/>
        </Routes>

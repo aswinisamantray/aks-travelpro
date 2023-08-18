@@ -49,7 +49,7 @@ app.post('/signup', async (req, res) => {
     const newuser=new User({name:name,password:hashedPassword,email:email});
     await newuser.save();
 
-    res.status(201).json({ message: 'User created successfully' });
+    res.status(201).json({ message: 'User created successfully' ,name});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -67,8 +67,25 @@ app.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user._id }, secretKey);
+     res.status(200).json({ message: 'Login successful' ,token,name});
 
-     res.status(200).json({ message: 'Login successful' ,token});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/exelogin', async (req, res) => {
+  try {
+    const {name, password} = req.body;
+    const user = await Subscriber.findOne({ name });
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!user || !isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    const token = jwt.sign({ userId: user._id }, secretKey);
+    res.status(200).json({ message: 'Login successful' ,token});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });

@@ -3,6 +3,16 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 
 const Contact = () => {
+
+    const sendMail=()=>{
+        const mailLink=`mailto:${'info@example.com'}`;
+        window.location.href=mailLink;
+    }
+
+    const gMap=()=>{
+        const mapLink=`https://www.google.com/maps?q=${37.7749},${-122.4194}`
+        window.open(mapLink,'_blank');
+    }
   return (
     <div >
         <Navbar/>
@@ -17,7 +27,7 @@ const Contact = () => {
                         <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos</p>
                         <div className="d-flex align-items-center mb-4">
                             <div className="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary" style={{width:'50px',height:'50px'}}>
-                                <i className="fa fa-map-marker-alt text-white"></i>
+                                <i className="fa fa-map-marker-alt text-white" onClick={gMap}></i>
                             </div>
                             <div className="ms-3">
                                 <h5 className="text-primary">Office</h5>
@@ -35,7 +45,7 @@ const Contact = () => {
                         </div>
                         <div className="d-flex align-items-center">
                             <div className="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary" style={{width:'50px',height:'50px'}}>
-                                <i className="fa fa-envelope-open text-white"></i>
+                                <i className="fa fa-envelope-open text-white" onClick={sendMail}></i>
                             </div>
                             <div className="ms-3">
                                 <h5 className="text-primary">Email</h5>

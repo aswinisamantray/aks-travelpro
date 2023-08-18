@@ -5,6 +5,17 @@ import axios from 'axios';
 const Footer = () => {
     const [email, setEmail] = useState('');
     const [message,setMessage]=useState('');
+
+    const sendMail=()=>{
+        const mailLink=`mailto:${'info@example.com'}`;
+        window.location.href=mailLink;
+    }
+
+    const gMap=()=>{
+        const mapLink=`https://www.google.com/maps?q=${37.7749},${-122.4194}`
+        window.open(mapLink,'_blank');
+    }
+
     const subscribed=async()=>{
         setMessage('');
         if(email===''){
@@ -38,9 +49,9 @@ const Footer = () => {
                 </div>
                 <div className="col-lg-3 col-md-6">
                     <h4 className="text-white mb-3">Contact</h4>
-                    <p className="mb-2"><i className="fa fa-map-marker-alt me-3"></i>XYZ Street, Old York, UNA</p>
+                    <p className="mb-2"><i className="fa fa-map-marker-alt me-3" onClick={gMap}></i>XYZ Street, Old York, UNA</p>
                     <p className="mb-2"><i className="fa fa-phone-alt me-3"></i>+012 345 XXXX</p>
-                    <p className="mb-2"><i className="fa fa-envelope me-3"></i>info@example.com</p>
+                    <p className="mb-2"><i className="fa fa-envelope me-3" onClick={sendMail}></i>info@example.com</p>
                     <div className="d-flex pt-2">
                         <Link className="btn btn-outline-light btn-social" to="https://twitter.com/"><i className="fab fa-twitter"></i></Link>
                         <Link className="btn btn-outline-light btn-social" to="https://www.facebook.com/"><i className="fab fa-facebook-f"></i></Link>

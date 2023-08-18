@@ -1,30 +1,10 @@
 import React,{useState} from 'react'
-import {useNavigate, Link } from 'react-router-dom'
-import { useUserContext } from '../useContext/Context';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const LoginForm = () => {
-    const history=useNavigate();
-    const { setUserName } = useUserContext();
+const Executive = () => {
+
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-
-    const handleSubmit = async(e) => {
-        e.preventDefault();
-        const formData = {name,password};
-        try {
-          await axios.post('http://localhost:5000/login', formData)
-          .then(res=>{
-            const token = res.data.token;
-            if(token){
-              setUserName(name);
-              history('/');
-            }
-          })
-        } catch (error) {
-          console.error(error);
-        }
-      };
   return (
     <div className='mt-5'>
       <h2 style={{textAlign:'center'}}>TRAVEL PLANNER PRO</h2>
@@ -56,12 +36,7 @@ const LoginForm = () => {
                 </div>
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block mb-4" onClick={handleSubmit}>Sign in</button>
-
-            <div className="text-center">
-                <p>Not a member? <Link to="/register">Register</Link></p>
-                <p><Link to="/executive">Login as executive</Link></p>
-            </div>
+            <button type="submit" className="btn btn-primary btn-block mb-4">Sign in</button>
             </form>
         </div>
         </div>
@@ -69,4 +44,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default Executive

@@ -1,16 +1,20 @@
 import React ,{useState}from 'react';
 import { useNavigate,Link } from 'react-router-dom';
+import { useUserContext } from '../useContext/Context';
 import axios from 'axios';
 
 const Register = () => {
     const history=useNavigate();
+    const { setUserName } = useUserContext();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [checkPass,setCheckPass]=useState('')
     const [isChecked, setIsChecked] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [userMessage,setUserMessage]=useState('');
     const [emailMessage,setEmailMessage]=useState('');
+    const [passMessage,setPassMessage]=useState('');
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -27,6 +31,7 @@ const Register = () => {
           await axios.post('http://localhost:5000/signup', formData)
           .then(res=>{
             if(res.data!=='Email already exists'){
+              setUserName(name);
               history('/');
             }
             else{
@@ -38,6 +43,11 @@ const Register = () => {
           console.error(error);
         }
       };
+
+      const checkPassword=(e)=>{
+        setCheckPass(e.target.value)
+        e.target.value!==password?setPassMessage('Password does not match'):setPassMessage('')
+      }
   return (
     <div className='mt-5'>
         <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -63,12 +73,13 @@ const Register = () => {
 
                 <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerPassword">Password</label>
-                    <input type="password" id="registerPassword" placeholder='Set a strong password' className="form-control"/>
+                    <input type="password" id="registerPassword" placeholder='Set a strong password' value={password} className="form-control" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
 
                 <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="registerRepeatPassword">Repeat password</label>
-                    <input type="password" id="registerRepeatPassword" placeholder='Enter your password again' value={password} className="form-control" onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" id="registerRepeatPassword" placeholder='Enter your password again' value={checkPass} className="form-control" onChange={checkPassword}/>
+                  {passMessage}
                 </div>
 
                 <div className="form-check d-flex justify-content-center mb-4">
