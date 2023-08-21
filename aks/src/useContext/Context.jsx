@@ -9,7 +9,7 @@ export function UserContextProvider({ children }) {
   const [userName, setUserName] = useState('');
 
   return (
-    <UserContext.Provider value={{ userName, setUserName }}>
+    <UserContext.Provider value={{ userName, setUserName}}>
       {children}
     </UserContext.Provider>
   );

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const LoginForm = () => {
     const history=useNavigate();
-    const { setUserName } = useUserContext();
+    const { setUserName} = useUserContext();
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
 
@@ -27,7 +27,7 @@ const LoginForm = () => {
       };
   return (
     <div className='mt-5'>
-      <h2 style={{textAlign:'center'}}>TRAVEL PLANNER PRO</h2>
+      {/* <h2 style={{textAlign:'center'}}>TRAVEL PLANNER PRO</h2> */}
         <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li className="nav-item" role="presentation">
             <Link className="nav-link active" id="tab-login" data-mdb-toggle="pill" role="tab"

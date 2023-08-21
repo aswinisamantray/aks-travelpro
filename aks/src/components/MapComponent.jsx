@@ -1,8 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../css/MapComponent.css'
-import Navbar from './Navbar';
-import Footer from './Footer';
 import Destination from './Destination';
 import axios from 'axios';
 
@@ -19,7 +17,6 @@ const MapComponent = ({lat,lon,place}) => {
   return (
     <div>
      <div className="mapContainer" style={{marginTop:'5vw'}}>
-      <Navbar/>
       <MapContainer center={center} zoom={13} className='map'>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -42,7 +39,6 @@ const MapComponent = ({lat,lon,place}) => {
                     <button type="button" className="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style={{marginTop:'7px'}} onClick={handleSubmit}>Search</button>
       </div> */}
     <Destination place={place}/>
-      <Footer/>
     </div>
   )
 }

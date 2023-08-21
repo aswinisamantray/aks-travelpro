@@ -4,14 +4,31 @@ import '../css/bootstrap.min.css'
 import '../css/style.css'
 import { useUserContext } from "../useContext/Context";
 import useIsSpecialPage from "../hooks/useIsSpecialPage";
-export default function Navbar(){
 
+export default function Navbar(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [label,setLabel]=useState('');
     const { userName } = useUserContext();
 
       const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-      };     
+      };    
+
+      useEffect(()=>{
+        if(userName.length>0){
+            setLabel('Logout');
+        }
+        else{
+            setLabel('Register');
+        }
+      },[userName])
+
+      const logOut=()=>{
+        const cookie='_ga';
+        document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        userName.length=0;
+        setLabel('Register');
+      }
 
         const isSpecialPage=useIsSpecialPage();
       const navBG=isSpecialPage ? 'yellowgreen' : 'transparent';
@@ -34,7 +51,7 @@ export default function Navbar(){
                     </div>
                     <Link to='/contact' className='nav-item nav-link' onClick={toggleMenu}>Contact</Link>
                 </div>
-                <Link to='/register' className="btn btn-primary rounded-pill py-2 px-4">{userName.length>0?userName.substring(0,5)+(userName.length>5?'...':''):'Register'}</Link>
+                {<Link to={userName.length>0?'/login':'/register'} className="btn btn-primary rounded-pill py-2 px-4" onClick={userName.length>0?logOut:''}>{label}</Link>}
             </div>
         </nav>
     )

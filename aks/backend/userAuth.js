@@ -85,6 +85,12 @@ app.post('/exelogin', async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user._id }, secretKey);
+    if(token){
+      res.cookie("jwttoken",token,{
+        expires:new Date(Date.now()+25892000000),
+        httpOnly:true
+      });
+    }
     res.status(200).json({ message: 'Login successful' ,token});
   } catch (error) {
     console.error(error);

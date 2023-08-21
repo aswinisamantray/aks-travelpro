@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
-import Navbar from './Navbar'
-import Footer from './Footer'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useUserContext } from "../useContext/Context";
 
 const Home = ({ onLocationSelect }) => {
   const [place, setPlace] = useState('');
+  const { userName } = useUserContext();
   const handleSubmit=async ()=>{
     try {
       const response = await axios.get(
@@ -28,12 +28,12 @@ const Home = ({ onLocationSelect }) => {
   
   return (
     <div className="container-fluid position-relative p-0">
-      <Navbar/>
       <div className="container-fluid bg-primary py-5 mb-5 hero-header">
             <div className="container py-5">
                 <div className="row justify-content-center py-5">
                     <div className="col-lg-10 pt-lg-5 mt-lg-5 text-center">
                         <h1 className="display-3 text-white mb-3 animated slideInDown">Plan Your Vacation With Us</h1>
+                        <p className="fs-4 text-white mb-4 animated slideInDown display-3">{userName.length>0?`Welcome ${userName}`:''}</p>
                         <p className="fs-4 text-white mb-4 animated slideInDown">Get the details of best hotels and places at most affordable price</p>
                         <div className="position-relative w-75 mx-auto animated slideInDown">
                             <input className="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" value={place} placeholder="Eg: India" onChange={(e) => setPlace(e.target.value)}/>
@@ -43,7 +43,6 @@ const Home = ({ onLocationSelect }) => {
                 </div>
             </div>
         </div>
-      <Footer/>
     </div>
   )
 }

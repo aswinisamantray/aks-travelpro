@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar';
-import Footer from './Footer';
 import '../css/bootstrap.min.css'
 import '../css/style.css'
 import '../css/FAQ.css'
@@ -35,7 +33,6 @@ const FAQ = () => {
       
   return (
      <div className='faqContainer'>
-        <Navbar/>
         <div className="accordion item-container" id="accordionExample">
             <h1>Frequently Asked Questions(FAQ)</h1>
             {faqsArray.map((item,index)=>(
@@ -53,7 +50,6 @@ const FAQ = () => {
               </div>
             ))}
        </div>
-        <Footer/>
      </div>
   )
 }

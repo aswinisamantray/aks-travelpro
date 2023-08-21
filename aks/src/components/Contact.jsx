@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar'
-import Footer from './Footer'
 
 const Contact = () => {
 
@@ -15,7 +13,6 @@ const Contact = () => {
     }
   return (
     <div >
-        <Navbar/>
         <div className="container-xxl py-5 mt-5">
             <div className="container">
                 <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -95,7 +92,6 @@ const Contact = () => {
                 </div>
             </div>
         </div>
-         <Footer/>
     </div>
   )
 }

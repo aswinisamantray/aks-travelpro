@@ -12,7 +12,6 @@ const Register = () => {
     const [checkPass,setCheckPass]=useState('')
     const [isChecked, setIsChecked] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [userMessage,setUserMessage]=useState('');
     const [emailMessage,setEmailMessage]=useState('');
     const [passMessage,setPassMessage]=useState('');
 
