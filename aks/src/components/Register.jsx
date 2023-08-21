@@ -27,7 +27,7 @@ const Register = () => {
         const formData = {name,password, email };
 
         try {
-          await axios.post('http://localhost:5000/signup', formData)
+          await axios.post('https://travel-pro-backend.onrender.com/signup', formData)
           .then(res=>{
             if(res.data!=='Email already exists'){
               setUserName(name);

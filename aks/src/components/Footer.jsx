@@ -26,7 +26,7 @@ const Footer = () => {
         const data={email};
 
         try {
-            const response = await axios.post('http://localhost:5000/subscribe', data);
+            const response = await axios.post('https://travel-pro-backend.onrender.com/subscribe', data);
             if (response.data !== 'Already subscribed') {
                 setMessage('Thank you for subscribing!');
                 setEmail('');

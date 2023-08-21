@@ -13,7 +13,7 @@ const LoginForm = () => {
         e.preventDefault();
         const formData = {name,password};
         try {
-          await axios.post('http://localhost:5000/login', formData)
+          await axios.post('https://travel-pro-backend.onrender.com/login', formData)
           .then(res=>{
             const token = res.data.token;
             if(token){
