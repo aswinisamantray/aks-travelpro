@@ -11,6 +11,8 @@ import Error from './components/Error';
 import Executive from './components/Executive';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Planner from './components/Planner';
+import Calendar from './components/Calendar';
 
 function App() {
   const [latitude,setLatitude]=useState(null);
@@ -44,6 +46,8 @@ function App() {
          <Route exact path='/executive' element={<Executive/>}/>
          <Route exact path='/map' element={<MapComponent lat={latitude} lon={longitude} place={place}/>} />
          <Route exact path='/404' element={<Error/>}/>
+         <Route exact path='/planner' element={<Planner/>}/>
+         <Route exact path='/calendar' element={<Calendar/>}/>
        </Routes>
        <Footer/>
     </Router>
